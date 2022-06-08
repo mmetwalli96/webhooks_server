@@ -5,8 +5,10 @@ const router = require("express").Router();
 const controller = require("../controllers");
 
 // get requests
-
 router.get("/test", controller.get.test);
+
+// post requests
+router.post("/event_handler", controller.post.eventHandler);
 
 // Export the router
 module.exports = router;

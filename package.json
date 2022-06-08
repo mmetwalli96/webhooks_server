@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mmetwalli96/webhooks_server/issues"
   },
-  "homepage": "https://github.com/mmetwalli96/webhooks_server#readme"
+  "homepage": "https://github.com/mmetwalli96/webhooks_server#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  }
 }

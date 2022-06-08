@@ -105,3 +105,6 @@ dist
 
 # enviromental variables file
 .env
+
+# MacOS system files
+.DS_Store

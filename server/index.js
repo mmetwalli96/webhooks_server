@@ -38,8 +38,8 @@ app.use((req, res, next) => {
 app.use('/', router);
 
 // Host name and port number
-const port = parseInt(config.server.port);
-const host = config.server.host;
+const port = parseInt(config.port);
+const host = config.host;
 
 app.listen(port, () => {
     console.log(`Example app listening at http://${host}:${port}`)

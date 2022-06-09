@@ -1,8 +1,8 @@
 require 'sinatra'
 require 'json'
-require 'octokit'
 
-class DeploymentTutorial < Sinatra::Base
+
+
   get '/' do
     "Hello World!"
   end
@@ -12,4 +12,3 @@ class DeploymentTutorial < Sinatra::Base
     # puts payload
     "Deployed!"
   end
-end

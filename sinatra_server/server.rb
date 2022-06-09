@@ -1,4 +1,4 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'json'
 require 'octokit'
 
@@ -8,8 +8,8 @@ class DeploymentTutorial < Sinatra::Base
   end
 
   post '/deploy' do
-    payload = JSON.parse(request.body.read)
-    puts payload
+    # payload = JSON.parse(params[:payload])
+    # puts payload
     "Deployed!"
   end
 end

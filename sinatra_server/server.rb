@@ -1,14 +1,11 @@
 require 'sinatra'
 require 'json'
 
-
-
   get '/' do
     "Hello World!"
   end
 
-  post '/deploy' do
-    # payload = JSON.parse(params[:payload])
-    # puts payload
+  post '/event_handler' do
+    payload = JSON.parse(params[:payload])
     "Deployed!"
   end

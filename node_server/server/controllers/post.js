@@ -19,7 +19,6 @@ module.exports = {
       const status = await webhook.verify(payload, signature);
 
       if (status) {
-
         const payload = req.body;
         const name = req.headers["x-github-event"];
 
@@ -27,26 +26,24 @@ module.exports = {
           case "push":
             // create git pull request
             exec(command, (err, stdout, stderr) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).send(stderr);
-                }
-                console.log(stdout);
-            }
-            );
+              if (err) {
+                console.log(err);
+                return res.status(500).send(stderr);
+              }
+              console.log(stdout);
+            });
             break;
           case "pull_request":
             const pullRequestStatus = payload.action;
             if (pullRequestStatus === "closed") {
               // create git pull request
-                exec(command, (err, stdout, stderr) => {
-                    if (err) {
-                        console.log(err);
-                        return res.status(500).send(stderr);
-                    }
-                    console.log(stdout);
+              exec(command, (err, stdout, stderr) => {
+                if (err) {
+                  console.log(err);
+                  return res.status(500).send(stderr);
                 }
-                );
+                console.log(stdout);
+              });
               console.log("pull requested approved");
             }
             break;

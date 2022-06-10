@@ -12,7 +12,7 @@ module.exports = {
     });
 
     const path = process.env.DIRECTORY_PATH;
-    const command = `cd ${path} && git pull origin master`;
+   
 
     try {
       const signature = await webhook.sign(payload);
@@ -25,30 +25,32 @@ module.exports = {
         switch (name) {
           case "push":
             // create git pull request
+            const command = `cd ${path} && git pull origin main`;
+
             exec(command, (err, stdout, stderr) => {
               if (err) {
                 console.log(err);
                 return res.status(500).send(stderr);
               }
-              console.log(stdout);
+              return res.status(200).send(stdout);
             });
             break;
           case "pull_request":
             const pullRequestStatus = payload.action;
             if (pullRequestStatus === "closed") {
               // create git pull request
+              const command = `cd ${path} && git pull origin main`;
+
               exec(command, (err, stdout, stderr) => {
                 if (err) {
                   console.log(err);
                   return res.status(500).send(stderr);
                 }
-                console.log(stdout);
+                return res.status(200).send(stdout);
               });
-              console.log("pull requested approved");
             }
             break;
-        }
-        res.status(200).send("Deployed");
+        };
       } else {
         res.send(401);
       }

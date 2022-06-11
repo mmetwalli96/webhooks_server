@@ -23,7 +23,7 @@ module.exports = {
 
       switch (name) {
         case "push":
-          // create git pull request
+          
           const command = `cd ${path} && git pull origin main`;
 
           exec(command, (err, stdout, stderr) => {
@@ -34,10 +34,13 @@ module.exports = {
             return res.status(200).send(stdout);
           });
           break;
+          
         case "pull_request":
+
           const pullRequestStatus = payload.action;
+
           if (pullRequestStatus === "closed") {
-            // create git pull request
+            
             const command = `cd ${path} && git pull origin main`;
 
             exec(command, (err, stdout, stderr) => {

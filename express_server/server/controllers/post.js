@@ -25,7 +25,7 @@ module.exports = {
         case "push":
           
           const command = `cd ${path} && git pull origin main`;
-
+          // zack trial
           exec(command, (err, stdout, stderr) => {
             if (err) {
               console.log(err);
@@ -34,7 +34,7 @@ module.exports = {
             return res.status(200).send(stdout);
           });
           break;
-          
+
         case "pull_request":
 
           const pullRequestStatus = payload.action;

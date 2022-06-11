@@ -13,12 +13,13 @@ module.exports = {
 
     const path = process.env.DIRECTORY_PATH;
 
+    const payload = req.body;
+    const name = req.headers["x-github-event"];
     const signature = await webhook.sign(payload);
     const status = await webhook.verify(payload, signature);
 
     if (status) {
-      const payload = req.body;
-      const name = req.headers["x-github-event"];
+
 
       switch (name) {
         case "push":

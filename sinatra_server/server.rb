@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'json'
+  
+  set :port, 3000
 
   get '/' do
     "Hello World!"

@@ -52,7 +52,7 @@ module.exports = {
             break;
         };
       } else {
-        res.send(401);
+        res.status(401).send("Unauthorized access detected");
       }
     } catch (error) {
       res.status(500).send(error);

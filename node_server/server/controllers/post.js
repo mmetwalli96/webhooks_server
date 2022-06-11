@@ -12,18 +12,30 @@ module.exports = {
     });
 
     const path = process.env.DIRECTORY_PATH;
-   
 
-    try {
-      const signature = await webhook.sign(payload);
-      const status = await webhook.verify(payload, signature);
+    const signature = await webhook.sign(payload);
+    const status = await webhook.verify(payload, signature);
 
-      if (status) {
-        const payload = req.body;
-        const name = req.headers["x-github-event"];
+    if (status) {
+      const payload = req.body;
+      const name = req.headers["x-github-event"];
 
-        switch (name) {
-          case "push":
+      switch (name) {
+        case "push":
+          // create git pull request
+          const command = `cd ${path} && git pull origin main`;
+
+          exec(command, (err, stdout, stderr) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).send(stderr);
+            }
+            return res.status(200).send(stdout);
+          });
+          break;
+        case "pull_request":
+          const pullRequestStatus = payload.action;
+          if (pullRequestStatus === "closed") {
             // create git pull request
             const command = `cd ${path} && git pull origin main`;
 
@@ -34,28 +46,11 @@ module.exports = {
               }
               return res.status(200).send(stdout);
             });
-            break;
-          case "pull_request":
-            const pullRequestStatus = payload.action;
-            if (pullRequestStatus === "closed") {
-              // create git pull request
-              const command = `cd ${path} && git pull origin main`;
-
-              exec(command, (err, stdout, stderr) => {
-                if (err) {
-                  console.log(err);
-                  return res.status(500).send(stderr);
-                }
-                return res.status(200).send(stdout);
-              });
-            }
-            break;
-        };
-      } else {
-        res.status(401).send("Unauthorized access detected");
+          }
+          break;
       }
-    } catch (error) {
-      res.status(500).send(error);
+    } else {
+      res.status(401).send("Unauthorized access detected");
     }
   },
 };

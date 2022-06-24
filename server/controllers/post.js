@@ -25,7 +25,7 @@ module.exports = {
         case "push":
           
           const command = `cd ${path} && git pull origin main`;
-          // zack trial
+          // Amy trial
           exec(command, (err, stdout, stderr) => {
             if (err) {
               console.log(err);
